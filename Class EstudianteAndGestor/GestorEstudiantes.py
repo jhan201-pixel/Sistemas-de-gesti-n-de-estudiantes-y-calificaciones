@@ -1,4 +1,5 @@
 from Estudiante import Estudiante 
+from Persistencia import guardar_estudiantes, cargar_estudiantes
 class GestorEstudiantes:
     """
     Clase para gestionar una lista de estudiantes.
@@ -7,7 +8,7 @@ class GestorEstudiantes:
         """
         Inicializa una lista vacía de estudiantes.
         """
-        self.estudiantes = []
+        self.estudiantes = cargar_estudiantes()
 
     def agregar_estudiante(self, id_estudiante, nombre):
         """
@@ -22,6 +23,7 @@ class GestorEstudiantes:
             return
         nuevo = Estudiante(id_estudiante, nombre)
         self.estudiantes.append(nuevo)
+        guardar_estudiantes(self.estudiantes)
         print("✅ Estudiante agregado.")
 
     def buscar_estudiante(self, id_estudiante):
@@ -50,6 +52,7 @@ class GestorEstudiantes:
         est = self.buscar_estudiante(id_estudiante)
         if est:
             est.agregar_calificacion(nota)
+            guardar_estudiantes(self.estudiantes)
         else:
             print("❌ Estudiante no encontrado.")
 
@@ -63,6 +66,7 @@ class GestorEstudiantes:
         est = self.buscar_estudiante(id_estudiante)
         if est:
             self.estudiantes.remove(est)
+            guardar_estudiantes(self.estudiantes)
             print("🗑️ Estudiante eliminado.")
         else:
             print("❌ Estudiante no encontrado.")
