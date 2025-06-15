@@ -1,5 +1,7 @@
 import json
-from Estudiante import Estudiante
+
+from .Estudiante import Estudiante
+
 
 def guardar_estudiantes(estudiantes, archivo="estudiantes.json"):
     data = []
